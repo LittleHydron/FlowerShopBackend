@@ -1,18 +1,34 @@
+import {
+  Body,
+  Controller,
+  Get,
+  HttpCode,
+  HttpStatus,
+  Inject,
+  Post,
+  Request,
+  UseGuards
+} from '@nestjs/common';
+import { AuthGuard } from '@controllers/AuthGuard';
 import { IAuthService } from '@interfaces/services/IAuthService';
-
-import { Body, HttpCode, HttpStatus, Inject, Post } from '@nestjs/common';
-import { Controller } from '@nestjs/common';
+import { Public } from '@controllers/AnonDecorator';
 
 @Controller('auth')
 export class AuthController {
   constructor(
     @Inject(IAuthService)
-    private authService: IAuthService
-  ) {}
+    private authService: IAuthService) {}
 
+  @Public()
   @HttpCode(HttpStatus.OK)
   @Post('login')
-  signIn(@Body() signInDto: Record<string, any> /*TODO: replace with DTO*/) {
+  signIn(@Body() signInDto: Record<string, any> /* TODO: Replace with DTO */) {
     return this.authService.signIn(signInDto.username, signInDto.password);
+  }
+
+  @UseGuards(AuthGuard)
+  @Get('profile')
+  getProfile(@Request() req) {
+    return req.user;
   }
 }
