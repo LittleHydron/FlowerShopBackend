@@ -11,5 +11,6 @@ import { Module } from '@nestjs/common';
         provide: IUsersService,
         useClass: UsersService,
       }],
+    exports: [IUsersService],
 })
 export class UsersModule {}

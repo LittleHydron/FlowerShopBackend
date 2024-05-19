@@ -25,7 +25,8 @@
       "@modules/*": ["modules/*"],
       "@entities/*": ["entities/*"],
       "@services/*": ["services/*"],
-      "@interfaces/*": ["../interfaces/*"]
+      "@interfaces/*": ["../interfaces/*"],
+      "@constants/*": ["../constants/*"],
     }
   }
 }
