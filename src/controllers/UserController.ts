@@ -4,16 +4,18 @@ import { UserEntity } from "@entities/UserEntity";
 
 import { IUserService } from "@interfaces/services/IUserService";
 
-import { Inject } from "@nestjs/common";
+import { Controller, Get, Inject, Param } from "@nestjs/common";
 
+@Controller("user")
 export class UserController implements IUserController {
     constructor(
         @Inject(IUserService)
         private readonly userService: IUserService
     ) {}
 
-    getCardType(): Promise <string> {
-        return this.userService.getCardType();
+    @Get("card-type")
+    getCardType(@Param('userId') userId: number): Promise <string> | string {
+        return this.userService.getCardType(userId);
     }
 
     create(obj: Partial<UserEntity>): Promise<UserEntity> {

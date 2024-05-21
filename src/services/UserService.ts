@@ -20,19 +20,21 @@ export class UserService implements IUserService{
   remove(id: number): Promise<UserEntity> {
     throw new Error('Method not implemented.');
   }
-  getCardType(): Promise<string> {
-    throw new Error('Method not implemented.');
+  getCardType(userId: number): Promise<string> | string {
+    return this.users.find(user => user.userId === userId).cardType;
   }
   private readonly users = [
     {
       userId: 1,
       username: 'john',
       password: 'changeme',
+      cardType: 'Simple',
     },
     {
       userId: 2,
       username: 'maria',
       password: 'guess',
+      cardType: 'Bonus1',
     },
   ];
 

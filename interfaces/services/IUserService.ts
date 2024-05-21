@@ -4,7 +4,7 @@ import { UserEntity } from "@entities/UserEntity";
 
 export interface IUserService extends IBaseService <UserEntity>{
     findOneByUsername(username: string): Promise<UserEntity | undefined>;
-    getCardType(): Promise<string>;
+    getCardType(userId: number): Promise<string> | string;
 }
 
 export const IUserService = Symbol("IUserService");
