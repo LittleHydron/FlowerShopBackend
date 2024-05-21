@@ -3,6 +3,7 @@ import { DatabaseModule } from '@modules/database/DatabaseModule';
 
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
+import { UsersModule } from './UsersModule';
 
 @Module({
   imports: [
@@ -11,6 +12,7 @@ import { ConfigModule } from '@nestjs/config';
       isGlobal: true,
   }),
     AuthModule,
+    UsersModule,
     // DatabaseModule,
   ],
   controllers: [],

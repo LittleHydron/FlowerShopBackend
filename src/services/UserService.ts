@@ -26,12 +26,16 @@ export class UserService implements IUserService{
   private readonly users = [
     {
       userId: 1,
+      name: 'John',
+      surname: 'Doe',
       username: 'john',
       password: 'changeme',
       cardType: 'Simple',
     },
     {
       userId: 2,
+      name: 'Maria',
+      surname: 'Smith',
       username: 'maria',
       password: 'guess',
       cardType: 'Bonus1',
