@@ -1,6 +1,6 @@
-import { IUsersService } from '@interfaces/services/IUsersService';
+import { IUserService } from '@interfaces/services/IUserService';
 
-import { UsersService } from '@services/UsersService';
+import { UserService } from '@services/UserService';
 
 import { Module } from '@nestjs/common';
 
@@ -8,9 +8,9 @@ import { Module } from '@nestjs/common';
     imports: [],
     controllers: [],
     providers: [{
-        provide: IUsersService,
-        useClass: UsersService,
+        provide: IUserService,
+        useClass: UserService,
       }],
-    exports: [IUsersService],
+    exports: [IUserService],
 })
 export class UsersModule {}

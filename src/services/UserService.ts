@@ -1,10 +1,10 @@
 import { Injectable } from '@nestjs/common';
 
 import { UserEntity } from '@entities/UserEntity';
-import { IUsersService } from '@interfaces/services/IUsersService';
+import { IUserService } from '@interfaces/services/IUserService';
 
 @Injectable()
-export class UsersService implements IUsersService{
+export class UserService implements IUserService{
   create(obj: Partial<UserEntity>): Promise<UserEntity> {
     throw new Error('Method not implemented.');
   }
@@ -18,6 +18,9 @@ export class UsersService implements IUsersService{
     throw new Error('Method not implemented.');
   }
   remove(id: number): Promise<UserEntity> {
+    throw new Error('Method not implemented.');
+  }
+  getCardType(): Promise<string> {
     throw new Error('Method not implemented.');
   }
   private readonly users = [

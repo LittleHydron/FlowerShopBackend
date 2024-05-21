@@ -1,6 +1,6 @@
 import { IAuthService } from '@interfaces/services/IAuthService';
 
-import { IUsersService } from '@interfaces/services/IUsersService';
+import { IUserService } from '@interfaces/services/IUserService';
 
 import { Inject, Injectable, UnauthorizedException } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
@@ -8,8 +8,8 @@ import { JwtService } from '@nestjs/jwt';
 @Injectable()
 export class AuthService implements IAuthService{
   constructor(
-    @Inject(IUsersService)
-    private usersService: IUsersService,
+    @Inject(IUserService)
+    private usersService: IUserService,
     private jwtService: JwtService
   ) {}
 
