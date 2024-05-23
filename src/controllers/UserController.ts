@@ -4,7 +4,12 @@ import { UserEntity } from "@entities/UserEntity";
 
 import { IUserService } from "@interfaces/services/IUserService";
 
-import { Controller, Get, Inject, Param } from "@nestjs/common";
+import { Public } from "@controllers/AnonDecorator";
+
+import { Body, Controller, Get, HttpStatus, Inject, Param, Put } from "@nestjs/common";
+import { ApiBody, ApiResponse } from "@nestjs/swagger";
+import { CardTypeDto } from "@dto/CardTypeDto";
+import { UserDto, UserPutDto } from "@dto/UserDto";
 
 @Controller("user")
 export class UserController implements IUserController {
@@ -13,28 +18,27 @@ export class UserController implements IUserController {
         private readonly userService: IUserService
     ) {}
 
+    @Public()
+    @ApiResponse({
+        status: HttpStatus.OK,
+        description: 'The card type of the user',
+        type: CardTypeDto,
+    })
     @Get("card-type")
-    getCardType(@Param('userId') userId: number): Promise <string> | string {
-        return this.userService.getCardType(userId);
+    async getCardType(@Param('userId') userId: number): Promise <CardTypeDto> {
+        return this.userService.getCardType(userId).then(cardType => new CardTypeDto(cardType));
     }
 
-    create(obj: Partial<UserEntity>): Promise<UserEntity> {
-        throw new Error("Method not implemented.");
-    }
-
-    findAll(): Promise<UserEntity[]> {
-        throw new Error("Method not implemented.");
-    }
-
-    findOne(id: string): Promise<UserEntity> {
-        throw new Error("Method not implemented.");
-    }
-
-    update(id: string, obj: Partial<UserEntity>): Promise<UserEntity> {
-        throw new Error("Method not implemented.");
-    }
-
-    remove(id: string): Promise<UserEntity> {
-        throw new Error("Method not implemented.");
+    @ApiResponse({
+        status: HttpStatus.OK,
+        description: 'The user',
+        type: UserDto,
+    })
+    @ApiBody({
+        type: UserPutDto,
+    })
+    @Put(':id')
+    async update(@Param('id') id: number, @Body() obj: Partial<UserEntity>): Promise<UserDto> {
+        return this.userService.update(id, obj).then(user => new UserDto(user));
     }
 }

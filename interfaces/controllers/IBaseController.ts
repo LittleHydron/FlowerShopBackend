@@ -5,7 +5,7 @@ export interface IBaseController<T> {
   
     findOne(id: string): Promise<T>;
   
-    update(id: string, obj: Partial<T>): Promise<T>;
+    update(id: number, obj: Partial<T>): Promise<T>;
   
     remove(id: string): Promise<T>;
   }

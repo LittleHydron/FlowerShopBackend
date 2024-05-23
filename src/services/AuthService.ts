@@ -28,4 +28,13 @@ export class AuthService implements IAuthService{
       accessToken: await this.jwtService.signAsync(payload),
     };
   }
+
+  async register(user: Record<string, any>): Promise<{ accessToken: string }> {
+    const newUser = await this.usersService.create(user);
+    const payload = { sub: newUser.userId, username: newUser.username };
+
+    return {
+      accessToken: await this.jwtService.signAsync(payload),
+    };
+  }
 }

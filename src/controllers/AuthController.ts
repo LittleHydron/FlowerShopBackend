@@ -1,3 +1,12 @@
+import { IAuthService } from '@interfaces/services/IAuthService';
+
+import { Public } from '@controllers/AnonDecorator';
+import { AuthGuard } from '@controllers/AuthGuard';
+
+import { UserDto, UserLoginDto, UserRegisterDto } from '@dto/UserDto';
+
+
+import { ApiResponse } from '@nestjs/swagger';
 import {
   Body,
   Controller,
@@ -9,14 +18,6 @@ import {
   Request,
   UseGuards
 } from '@nestjs/common';
-
-import { IAuthService } from '@interfaces/services/IAuthService';
-
-import { Public } from '@controllers/AnonDecorator';
-import { AuthGuard } from '@controllers/AuthGuard';
-import { ApiResponse } from '@nestjs/swagger';
-import { UserEntity } from '@entities/UserEntity';
-import { UserDto } from 'dto/UserDto';
 
 @Controller('auth')
 export class AuthController {
@@ -32,7 +33,7 @@ export class AuthController {
     type: String,
   })
   @Post('login')
-  signIn(@Body() signInDto: Record<string, any> /* TODO: Replace with DTO */) {
+  signIn(@Body() signInDto: UserLoginDto) {
     return this.authService.signIn(signInDto.username, signInDto.password);
   }
 
@@ -45,5 +46,16 @@ export class AuthController {
   })
   getProfile(@Request() req) {
     return req.user;
+  }
+
+  @Public()
+  @Post('register')
+  @ApiResponse({
+    status: HttpStatus.CREATED,
+    description: 'Register',
+    type: UserDto,
+  })
+  async register(@Body() user: UserRegisterDto) {
+    return this.authService.register(user);
   }
 }

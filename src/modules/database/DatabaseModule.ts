@@ -5,7 +5,6 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 @Module({
     imports: [
         ConfigModule.forRoot({
-            envFilePath: '../../constants/.env',
             isGlobal: true,
         }),
         TypeOrmModule.forRootAsync({
@@ -18,7 +17,7 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
                     username: configService.get<string>('DB_USERNAME'),
                     password: configService.get<string>('DB_PASSWORD'),
                     database: configService.get<string>('DB_NAME'),
-                    entities: [__dirname + '/../**/*.entity{.ts,.js}'],
+                    entities: [__dirname + '../../entities/*Entity.ts'],
                     autoLoadEntities: true,
                     synchronize: true,
                 };

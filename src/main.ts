@@ -16,7 +16,6 @@ async function bootstrap() {
     .setTitle('Flower Shop')
     .setDescription('The FlowerShop API description')
     .setVersion('1.0')
-    .addTag('flowers')
     .build();
   const document = SwaggerModule.createDocument(app, swaggerConfig);
   SwaggerModule.setup('api', app, document);

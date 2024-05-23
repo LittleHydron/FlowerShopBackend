@@ -1,6 +1,8 @@
+import { CardTypeDto } from "@dto/CardTypeDto";
+import { UserDto } from "@dto/UserDto";
 import { UserEntity } from "@entities/UserEntity";
-import { IBaseController } from "@interfaces/controllers/IBaseController";
 
-export interface IUserController extends IBaseController<UserEntity> {
-    getCardType(userId: number): Promise <string> | string;
+export interface IUserController {
+    getCardType(userId: number): Promise <CardTypeDto>;
+    update(id: number, obj: Partial<UserEntity>): Promise<UserDto>;
 }
