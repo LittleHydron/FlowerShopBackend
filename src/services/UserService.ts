@@ -6,6 +6,7 @@ import { IUserService } from '@interfaces/services/IUserService';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Injectable } from '@nestjs/common';
 import { Repository } from 'typeorm';
+import { UserPutDto } from '@dto/UserDto';
 
 @Injectable()
 export class UserService implements IUserService{
@@ -18,19 +19,24 @@ export class UserService implements IUserService{
     return this.usersRepository.save(obj);
   }
 
-  findOne(id: number): Promise<UserEntity> {
-    return this.usersRepository.findOneById(id);
+  async findOne(id: number): Promise<UserEntity> {
+    const user = await this.usersRepository.findOneBy({ userId: id });
+    return user;
   }
 
-  update(id: number, changedObj: Partial<UserEntity>): Promise<UserEntity> {
-    return this.usersRepository.save({ ...changedObj, userId: id });
+  async update(id: number, changedObj: UserPutDto): Promise<UserEntity> {
+    await this.usersRepository.update(id, changedObj);
+    const newUser = await this.usersRepository.findOneBy({ userId: id });
+    return newUser;
   }
 
-  getCardType(userId: number): Promise<CardTypeEntity> {
-    return this.usersRepository.findOneById(userId).then(user => user.cardType);
+  async getCardTypeId(userId: number): Promise<number> {
+    const user = await this.usersRepository.findOneBy({ userId: userId});
+    console.log("In Service: " + user);
+    return user.cardTypeId;
   }
 
   async findOneByUsername(username: string): Promise<UserEntity | undefined> {
-    return this.usersRepository.findOneBy({ username });
+    return this.usersRepository.findOneBy({ username: username });
   }
 }

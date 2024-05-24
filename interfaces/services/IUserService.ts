@@ -8,7 +8,7 @@ export interface IUserService {
 
   update(id: number, changedObj: Partial<UserEntity>): Promise<UserEntity> ;
 
-  getCardType(userId: number): Promise<CardTypeEntity>;
+  getCardTypeId(userId: number): Promise<number>;
 
   findOneByUsername(username: string): Promise<UserEntity | undefined>;
 }

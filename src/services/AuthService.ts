@@ -1,3 +1,4 @@
+import { UserEntity } from '@entities/UserEntity';
 import { IAuthService } from '@interfaces/services/IAuthService';
 
 import { IUserService } from '@interfaces/services/IUserService';
@@ -29,8 +30,9 @@ export class AuthService implements IAuthService{
     };
   }
 
-  async register(user: Record<string, any>): Promise<{ accessToken: string }> {
+  async register(user: UserEntity): Promise<{ accessToken: string }> {
     const newUser = await this.usersService.create(user);
+    console.log(newUser);
     const payload = { sub: newUser.userId, username: newUser.username };
 
     return {

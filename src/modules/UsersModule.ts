@@ -9,6 +9,7 @@ import { CardTypeEntity } from '@entities/CardTypeEntity';
 
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { CardTypeService } from '@services/CardTypeService';
 
 @Module({
     imports: [TypeOrmModule.forFeature([UserEntity, CardTypeEntity])],
@@ -16,7 +17,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
     providers: [{
         provide: IUserService,
         useClass: UserService,
-      }],
+      }, CardTypeService],
     exports: [IUserService],
 })
 export class UsersModule {}

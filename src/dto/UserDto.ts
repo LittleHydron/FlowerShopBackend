@@ -27,10 +27,11 @@ export class UserDto {
 
 export class UserPutDto {
     constructor(user: UserEntity) {
+        console.log(user);
         this.name = user.name;
         this.surname = user.surname;
         this.username = user.username;
-        this.cardTypeId = user.cardType.cardTypeId;
+        this.cardTypeId = user.cardTypeId;
     }
 
     @ApiProperty()
@@ -66,4 +67,7 @@ export class UserRegisterDto {
 
     @ApiProperty()
     password: string;
+
+    @ApiProperty()
+    cardTypeId: number;
 }

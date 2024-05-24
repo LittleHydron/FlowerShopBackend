@@ -10,12 +10,16 @@ import { Body, Controller, Get, HttpStatus, Inject, Param, Put } from "@nestjs/c
 import { ApiBody, ApiResponse } from "@nestjs/swagger";
 import { CardTypeDto } from "@dto/CardTypeDto";
 import { UserDto, UserPutDto } from "@dto/UserDto";
+import { In } from "typeorm";
+import { CardTypeService } from "@services/CardTypeService";
 
 @Controller("user")
 export class UserController implements IUserController {
     constructor(
         @Inject(IUserService)
-        private readonly userService: IUserService
+        private readonly userService: IUserService,
+        @Inject(CardTypeService)
+        private readonly cardTypeService: CardTypeService
     ) {}
 
     @Public()
@@ -26,7 +30,10 @@ export class UserController implements IUserController {
     })
     @Get("card-type")
     async getCardType(@Param('userId') userId: number): Promise <CardTypeDto> {
-        return this.userService.getCardType(userId).then(cardType => new CardTypeDto(cardType));
+        const cardTypeId = await this.userService.getCardTypeId(userId);
+        console.log("In Controller: " + cardTypeId);
+        const cardType = await this.cardTypeService.findOne(cardTypeId);
+        return new CardTypeDto(cardType);
     }
 
     @ApiResponse({
@@ -37,8 +44,11 @@ export class UserController implements IUserController {
     @ApiBody({
         type: UserPutDto,
     })
+    @Public()
     @Put(':id')
-    async update(@Param('id') id: number, @Body() obj: Partial<UserEntity>): Promise<UserDto> {
-        return this.userService.update(id, obj).then(user => new UserDto(user));
+    async update(@Param('id') id: number, @Body() obj: Partial<UserEntity>): Promise<UserPutDto> {
+        const newUser = await this.userService.update(id, obj);
+        const userPutDto = new UserPutDto(newUser);
+        return userPutDto;
     }
 }

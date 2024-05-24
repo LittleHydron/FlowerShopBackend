@@ -9,6 +9,8 @@ import { Bouquet_has_flowersEntity } from '@entities/Bouquet_has_flowersEntity';
 import { Order_has_BouquetesEntity } from '@entities/Order_has_BouquetesEntity';
 import { OrderEntity } from '@entities/OrderEntity';
 import { DeliveryEntity } from '@entities/DeliveryEntity';
+import { IBouqueteService } from '@interfaces/services/IBouqueteService';
+import { BouqueteService } from '@services/BouqueteService';
 
 @Module({
     imports: [TypeOrmModule.forFeature([
@@ -22,10 +24,10 @@ import { DeliveryEntity } from '@entities/DeliveryEntity';
         DeliveryEntity
     ])],
     controllers: [BouqueteController],
-    // providers: [{
-    //     provide: IUserService,
-    //     useClass: UserService,
-    //   }],
-    // exports: [IUserService],
+    providers: [{
+        provide: IBouqueteService,
+        useClass: BouqueteService,
+      }],
+    exports: [IBouqueteService],
 })
 export class BouquetesModule {}

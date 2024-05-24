@@ -16,7 +16,7 @@ export class Bouquet_has_flowersEntity {
     @Column()
     quantity: number;
     
-    @ManyToOne(() => BouqueteEntity, bouquete => bouquete.flowers)
+    @ManyToOne(() => BouqueteEntity, bouquete => bouquete.flower)
     bouquete: BouqueteEntity;
     
     @ManyToOne(() => FlowerEntity, flower => flower.bouquetes)

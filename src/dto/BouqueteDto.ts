@@ -8,15 +8,16 @@ import { ApiProperty } from "@nestjs/swagger";
 export class BouqueteDto {
 
     constructor(bouquete: BouqueteEntity) {
+        console.log(bouquete);
         this.event = new EventDto(bouquete.event);
-        this.flowers = bouquete.flowers.map(flower => new FlowerDto(flower));
+        this.flower = new FlowerDto(bouquete.flower);
     }
 
     @ApiProperty()
     event: EventDto;
 
     @ApiProperty()
-    flowers: FlowerDto[];
+    flower: FlowerDto;
 }
 
 export class BouqueteCreateDto {
@@ -25,8 +26,8 @@ export class BouqueteCreateDto {
     eventId: number;
 
     @ApiProperty()
-    flowerIds: number[];
+    flowerId: number;
 
     @ApiProperty()
-    flowersQuantities: number[];
+    flowersQuantity: number;
 }

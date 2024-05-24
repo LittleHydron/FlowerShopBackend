@@ -10,6 +10,6 @@ export class FlowerEntity {
     @Column()
     flowerName: string;
 
-    @OneToMany(() => Bouquet_has_flowersEntity, bouquet_has_flowers => bouquet_has_flowers.flower)
+    @OneToMany(() => BouqueteEntity, bouquete => bouquete.flower)
     bouquetes: BouqueteEntity[];
 }

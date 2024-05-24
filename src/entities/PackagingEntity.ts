@@ -1,5 +1,6 @@
 import { BouqueteEntity } from "@entities/BouqueteEntity";
 import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import { OrderEntity } from "./OrderEntity";
 
 @Entity('Packaging')
 export class PackagingEntity {
@@ -12,6 +13,6 @@ export class PackagingEntity {
     @Column()
     packagingName: string;
 
-    @OneToMany(() => BouqueteEntity, bouquete => bouquete.event)
-    bouquetes: BouqueteEntity[];
+    @OneToMany(() => OrderEntity, order => order.packaging)
+    orders: OrderEntity[];
 }

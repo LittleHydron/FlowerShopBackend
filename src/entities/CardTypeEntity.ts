@@ -3,6 +3,11 @@ import { UserEntity } from "@entities/UserEntity";
 
 @Entity('CardType')
 export class CardTypeEntity {
+
+    constructor(cardType: Partial<CardTypeEntity>) {
+        Object.assign(this, cardType);
+    }
+
     @PrimaryGeneratedColumn()
     cardTypeId: number;
 
