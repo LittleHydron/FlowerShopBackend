@@ -6,11 +6,12 @@ import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   
-  // app.enableCors({
-  //   origin: true,
-  //   methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
-  //   allowedHeaders: "Content-Type, Accept, Authorization"
-  // });
+  app.enableCors({
+    origin: true,
+    methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+    allowedHeaders: "Content-Type, Accept, Authorization",
+    credentials: true
+  });
 
   const swaggerConfig = new DocumentBuilder()
     .setTitle('Flower Shop')
@@ -19,8 +20,8 @@ async function bootstrap() {
     .build();
   const document = SwaggerModule.createDocument(app, swaggerConfig);
   SwaggerModule.setup('api', app, document);
-  await app.listen(2700);
-  console.log('Server is running on http://localhost:2700');
+  await app.listen(1369);
+  console.log('Server is running on http://localhost:1369');
 }
 
 bootstrap();

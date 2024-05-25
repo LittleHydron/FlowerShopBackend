@@ -6,6 +6,7 @@ export class FlowerDto {
     constructor(flower: FlowerEntity) {
         this.flowerId = flower.flowerId;
         this.name = flower.flowerName;
+        this.flowerPrice = flower.flowerPrice;
     }
 
     @ApiProperty()
@@ -13,4 +14,7 @@ export class FlowerDto {
     
     @ApiProperty()
     name: string;
+
+    @ApiProperty()
+    flowerPrice: number;
 }

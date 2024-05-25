@@ -7,4 +7,7 @@ export class FlowerEntity {
     
     @Column()
     flowerName: string;
+
+    @Column()
+    flowerPrice: number;
 }
