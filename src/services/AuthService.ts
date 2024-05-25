@@ -31,6 +31,7 @@ export class AuthService implements IAuthService{
   }
 
   async register(user: UserEntity): Promise<{ accessToken: string }> {
+    
     const newUser = await this.usersService.create(user);
     console.log(newUser);
     const payload = { sub: newUser.userId, username: newUser.username };

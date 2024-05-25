@@ -1,5 +1,5 @@
-import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 import { UserEntity } from "@entities/UserEntity";
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity('CardType')
 export class CardTypeEntity {
@@ -19,9 +19,6 @@ export class CardTypeEntity {
 
     @Column()
     discountOnDeliveries: number;
-
-    @Column()
-    cardPrice: number;
 
     @OneToMany(() => UserEntity, user => user.cardType)
     users: UserEntity[];

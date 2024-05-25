@@ -3,23 +3,23 @@ import { IUserController } from "@interfaces/controllers/IUserController";
 import { UserEntity } from "@entities/UserEntity";
 
 import { IUserService } from "@interfaces/services/IUserService";
+import { ICardTypeService } from "@interfaces/services/ICardTypeService";
 
 import { Public } from "@controllers/AnonDecorator";
 
-import { Body, Controller, Get, HttpStatus, Inject, Param, Put } from "@nestjs/common";
-import { ApiBody, ApiResponse } from "@nestjs/swagger";
 import { CardTypeDto } from "@dto/CardTypeDto";
 import { UserDto, UserPutDto } from "@dto/UserDto";
-import { In } from "typeorm";
-import { CardTypeService } from "@services/CardTypeService";
+
+import { Body, Controller, Get, HttpStatus, Inject, Param, Put } from "@nestjs/common";
+import { ApiBody, ApiResponse } from "@nestjs/swagger";
 
 @Controller("user")
 export class UserController implements IUserController {
     constructor(
         @Inject(IUserService)
         private readonly userService: IUserService,
-        @Inject(CardTypeService)
-        private readonly cardTypeService: CardTypeService
+        @Inject(ICardTypeService)
+        private readonly cardTypeService: ICardTypeService
     ) {}
 
     @Public()

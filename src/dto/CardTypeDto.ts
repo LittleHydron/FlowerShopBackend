@@ -3,11 +3,15 @@ import { ApiProperty } from "@nestjs/swagger";
 
 export class CardTypeDto {
     constructor(cardType: CardTypeEntity) {
+        this.cardTypeId = cardType.cardTypeId;
         this.cardType = cardType.cardType;
         this.discountOnBouquetes = cardType.discountOnBouquetes;
         this.discountOnDeliveries = cardType.discountOnDeliveries;
-        this.cardPrice = cardType.cardPrice;
     }
+
+    @ApiProperty()
+    cardTypeId: number;
+
     @ApiProperty()
     cardType: string;
 
@@ -16,7 +20,4 @@ export class CardTypeDto {
 
     @ApiProperty()
     discountOnDeliveries: number;
-
-    @ApiProperty()
-    cardPrice: number;
 }

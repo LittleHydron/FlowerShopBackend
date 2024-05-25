@@ -1,20 +1,27 @@
 import { IAuthService } from '@interfaces/services/IAuthService';
+import { ICardTypeService } from '@interfaces/services/ICardTypeService';
 
 import { UsersModule } from '@modules/UsersModule';
 
 import { AuthService } from '@services/AuthService';
+import { CardTypeService } from '@services/CardTypeService';
 
 import { AuthController } from '@controllers/AuthController';
+import { AuthGuard } from '@controllers/AuthGuard';
 
 import { jwtConstants } from '@constants/jwtConstants';
 
+import { UserEntity } from '@entities/UserEntity';
+import { CardTypeEntity } from '@entities/CardTypeEntity';
+
 import { Module } from '@nestjs/common';
 import { JwtModule } from '@nestjs/jwt';
-import { AuthGuard } from '@controllers/AuthGuard';
 import { APP_GUARD } from '@nestjs/core';
+import { TypeOrmModule } from '@nestjs/typeorm';
 
 @Module({
     imports: [
+        TypeOrmModule.forFeature([UserEntity, CardTypeEntity]),
         UsersModule,
         JwtModule.registerAsync({
             useFactory: async () => ({
@@ -27,6 +34,10 @@ import { APP_GUARD } from '@nestjs/core';
         {
             provide: IAuthService,
             useClass: AuthService,
+        },
+        {
+            provide: ICardTypeService,
+            useClass: CardTypeService,
         },
         {
             provide: APP_GUARD,

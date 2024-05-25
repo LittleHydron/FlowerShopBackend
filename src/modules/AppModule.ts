@@ -2,10 +2,11 @@ import { AuthModule } from '@modules/AuthModule';
 import { DatabaseModule } from '@modules/database/DatabaseModule';
 import { UsersModule } from '@modules/UsersModule';
 import { BouquetesModule } from '@modules/BouquetesModule';
-import { OrdersModule } from '@modules/OdersModule';
 
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
+import { FlowersModule } from './FlowersModule';
+import { CardTypesModule } from './CardTypesModule';
 
 @Module({
   imports: [
@@ -16,7 +17,8 @@ import { ConfigModule } from '@nestjs/config';
     UsersModule,
     BouquetesModule,
     DatabaseModule,
-    OrdersModule,
+    FlowersModule,
+    CardTypesModule,
   ],
   controllers: [],
   providers: [],

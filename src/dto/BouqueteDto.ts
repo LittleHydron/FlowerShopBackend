@@ -1,6 +1,3 @@
-import { EventDto } from "@dto/EventDto";
-import { FlowerDto } from "@dto/FlowerDto";
-
 import { BouqueteEntity } from "@entities/BouqueteEntity";
 
 import { ApiProperty } from "@nestjs/swagger";
@@ -8,26 +5,29 @@ import { ApiProperty } from "@nestjs/swagger";
 export class BouqueteDto {
 
     constructor(bouquete: BouqueteEntity) {
-        console.log(bouquete);
-        this.event = new EventDto(bouquete.event);
-        this.flower = new FlowerDto(bouquete.flower);
+        this.bouqueteId = bouquete.bouqueteId;
+        this.name = bouquete.name;
+        this.event = bouquete.event;
     }
 
     @ApiProperty()
-    event: EventDto;
+    bouqueteId: number;
 
     @ApiProperty()
-    flower: FlowerDto;
+    name: string;
+
+    @ApiProperty()
+    event: string;
 }
 
 export class BouqueteCreateDto {
 
     @ApiProperty()
-    eventId: number;
+    bouqueteId: number;
 
     @ApiProperty()
-    flowerId: number;
+    name: string;
 
     @ApiProperty()
-    flowersQuantity: number;
+    event: string;
 }

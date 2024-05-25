@@ -1,18 +1,19 @@
-import { BouqueteController } from '@controllers/BouqueteController';
-import { Bouquet_has_flowersEntity } from '@entities/Bouquet_has_flowersEntity';
-import { BouqueteEntity } from '@entities/BouqueteEntity';
+import { IFlowerService } from '@interfaces/services/IFlowerService';
+
+import { FlowerController } from '@controllers/FlowerController';
 import { FlowerEntity } from '@entities/FlowerEntity';
+import { FlowerService } from '@services/FlowerService';
 
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 
 @Module({
-    imports: [TypeOrmModule.forFeature([BouqueteEntity, FlowerEntity, Bouquet_has_flowersEntity])],
-    controllers: [BouqueteController],
-    // providers: [{
-    //     provide: IUserService,
-    //     useClass: UserService,
-    //   }],
-    // exports: [IUserService],
+    imports: [TypeOrmModule.forFeature([FlowerEntity])],
+    controllers: [FlowerController],
+    providers: [{
+        provide: IFlowerService,
+        useClass: FlowerService,
+      }],
+    exports: [IFlowerService],
 })
 export class FlowersModule {}

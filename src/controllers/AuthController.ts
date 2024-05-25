@@ -18,12 +18,17 @@ import {
   Request,
   UseGuards
 } from '@nestjs/common';
+import { UserEntity } from '@entities/UserEntity';
+import { ICardTypeService } from '@interfaces/services/ICardTypeService';
 
 @Controller('auth')
 export class AuthController {
   constructor(
     @Inject(IAuthService)
-    private authService: IAuthService) {}
+    private authService: IAuthService,
+    @Inject(ICardTypeService)
+    private cardTypeService: ICardTypeService
+  ) {}
 
   @Public()
   @HttpCode(HttpStatus.OK)
@@ -56,6 +61,12 @@ export class AuthController {
     type: UserDto,
   })
   async register(@Body() user: UserRegisterDto) {
-    return this.authService.register(user);
+    const userEntity = new UserEntity();
+    userEntity.name = user.name;
+    userEntity.surname = user.surname;
+    userEntity.username = user.username;
+    userEntity.password = user.password;
+    userEntity.cardType = await this.cardTypeService.findOne(user.cardTypeId);
+    return this.authService.register(userEntity);
   }
 }

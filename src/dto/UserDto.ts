@@ -9,7 +9,7 @@ export class UserDto {
         this.name = user.name;
         this.surname = user.surname;
         this.username = user.username;
-        this.cardType = user.cardType;
+        this.cardType = new CardTypeDto(user.cardType);
     }
 
     @ApiProperty()
@@ -31,7 +31,7 @@ export class UserPutDto {
         this.name = user.name;
         this.surname = user.surname;
         this.username = user.username;
-        this.cardTypeId = user.cardTypeId;
+        this.cardTypeId = user.cardType.cardTypeId;
     }
 
     @ApiProperty()

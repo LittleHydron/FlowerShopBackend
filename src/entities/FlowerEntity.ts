@@ -1,6 +1,4 @@
-import { BouqueteEntity } from "@entities/BouqueteEntity";
-import { Bouquet_has_flowersEntity } from "entities/Bouquet_has_flowersEntity";
-import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity('Flower')
 export class FlowerEntity {
@@ -9,7 +7,4 @@ export class FlowerEntity {
     
     @Column()
     flowerName: string;
-
-    @OneToMany(() => BouqueteEntity, bouquete => bouquete.flower)
-    bouquetes: BouqueteEntity[];
 }

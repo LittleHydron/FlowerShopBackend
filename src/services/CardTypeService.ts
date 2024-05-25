@@ -11,12 +11,12 @@ export class CardTypeService {
     private readonly cardTypesRepository: Repository<CardTypeEntity>,
   ) {}
 
-  create(obj: CardTypeEntity): Promise<CardTypeEntity> {
-    return this.cardTypesRepository.save(obj);
+  async findOne(id: number): Promise<CardTypeEntity> {
+    console.log('CardTypeService.findOne ', id);
+    return await this.cardTypesRepository.findOneBy({ cardTypeId: id });
   }
 
-  async findOne(id: number): Promise<CardTypeEntity> {
-    console.log("In Card Type Service: " + id)
-    return await this.cardTypesRepository.findOneBy({ cardTypeId: id });
+  async getAll(): Promise<CardTypeEntity[]> {
+    return await this.cardTypesRepository.find();
   }
 }

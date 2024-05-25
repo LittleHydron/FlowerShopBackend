@@ -32,8 +32,7 @@ export class UserService implements IUserService{
 
   async getCardTypeId(userId: number): Promise<number> {
     const user = await this.usersRepository.findOneBy({ userId: userId});
-    console.log("In Service: " + user);
-    return user.cardTypeId;
+    return user.cardType.cardTypeId;
   }
 
   async findOneByUsername(username: string): Promise<UserEntity | undefined> {
