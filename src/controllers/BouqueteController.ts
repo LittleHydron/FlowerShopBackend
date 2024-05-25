@@ -5,6 +5,7 @@ import { IBouqueteService } from "@interfaces/services/IBouqueteService";
 import { Public } from "@controllers/AnonDecorator";
 
 import { BouqueteDto } from "@dto/BouqueteDto";
+import { DtoTransformer } from "@dto/DtoTransformer";
 
 import { Controller, Get, Inject } from "@nestjs/common";
 
@@ -19,6 +20,6 @@ export class BouqueteController implements IBouqueteController{
     @Get('all')
     async getAllBouquetes(): Promise<BouqueteDto[]> {
         const allBouquetes = await this.bouqueteService.getAll();
-        return allBouquetes.map(bouquete => new BouqueteDto(bouquete));
+        return allBouquetes.map(bouquete => DtoTransformer.BouqueteEntityToBouqueteDto(bouquete));
     }
 }

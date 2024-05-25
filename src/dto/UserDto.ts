@@ -1,16 +1,8 @@
-import { UserEntity } from "@entities/UserEntity";
-
 import { CardTypeDto } from "@dto/CardTypeDto";
 
 import { ApiProperty } from "@nestjs/swagger";
 
 export class UserDto {
-    constructor(user: UserEntity) {
-        this.name = user.name;
-        this.surname = user.surname;
-        this.username = user.username;
-        this.cardType = new CardTypeDto(user.cardType);
-    }
 
     @ApiProperty()
     name: string;
@@ -26,13 +18,6 @@ export class UserDto {
 }
 
 export class UserPutDto {
-    constructor(user: UserEntity) {
-        console.log(user);
-        this.name = user.name;
-        this.surname = user.surname;
-        this.username = user.username;
-        this.cardTypeId = user.cardType.cardTypeId;
-    }
 
     @ApiProperty()
     name: string;
@@ -44,7 +29,7 @@ export class UserPutDto {
     username: string;
 
     @ApiProperty()
-    cardTypeId: number;
+    cardTypeCardTypeId: number;
 }
 
 export class UserLoginDto {

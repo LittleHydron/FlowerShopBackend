@@ -5,6 +5,7 @@ import { ICardTypeService } from "@interfaces/services/ICardTypeService";
 import { Public } from "@controllers/AnonDecorator";
 
 import { CardTypeDto } from "@dto/CardTypeDto";
+import { DtoTransformer } from "@dto/DtoTransformer";
 
 import { Controller, Get, Inject, Param } from "@nestjs/common";
 
@@ -20,14 +21,13 @@ export class CardTypeController implements ICardTypeController{
     @Get('all')
     async getAll(): Promise<CardTypeDto[]> {
         const cardTypes = await this.cardTypeService.getAll();
-        return cardTypes.map(cardType => new CardTypeDto(cardType));
+        return cardTypes.map(cardType => DtoTransformer.CardTypeEntityToCardTypeDto(cardType));
     }
 
     @Public()
     @Get(':id')
     async getById(@Param('id') id: number): Promise<CardTypeDto> {
         const cardType = await this.cardTypeService.findOne(id);
-        console.log(cardType);
-        return new CardTypeDto(cardType);
+        return DtoTransformer.CardTypeEntityToCardTypeDto(cardType);
     }
 }

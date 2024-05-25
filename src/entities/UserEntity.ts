@@ -1,5 +1,5 @@
-import { UserRegisterDto } from "@dto/UserDto";
 import { CardTypeEntity } from "@entities/CardTypeEntity";
+
 import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity('User')
@@ -19,6 +19,9 @@ export class UserEntity {
 
     @Column()
     password: string;
+
+    @Column()
+    cardTypeCardTypeId: number;
 
     @ManyToOne(() => CardTypeEntity, cardType => cardType.users)
     cardType: CardTypeEntity;

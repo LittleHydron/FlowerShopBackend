@@ -5,6 +5,7 @@ import { IFlowerService } from "@interfaces/services/IFlowerService";
 import { Public } from "@controllers/AnonDecorator";
 
 import { FlowerDto } from "@dto/FlowerDto";
+import { DtoTransformer } from "@dto/DtoTransformer";
 
 import { Controller, Get, Inject, Param } from "@nestjs/common";
 
@@ -20,13 +21,13 @@ export class FlowerController implements IFlowerController{
     @Get('all')
     async getAll(): Promise<FlowerDto[]> {
         const flowers = await this.flowerService.getAll();
-        return flowers.map(flower => new FlowerDto(flower));
+        return flowers.map(flower => DtoTransformer.FlowerEntityToFlowerDto(flower));
     }
 
     @Public()
     @Get(':id')
     async getById(@Param('id') id: number): Promise<FlowerDto> {
         const flower = await this.flowerService.findOneById(id);
-        return new FlowerDto(flower);
+        return DtoTransformer.FlowerEntityToFlowerDto(flower);
     }
 }

@@ -21,7 +21,7 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
                     autoLoadEntities: true,
                     synchronize: true,
                 };
-                console.log('Database Configuration:', dbConfig);
+                console.log('Database Configuration connected');
                 return dbConfig;
             },
             inject: [ConfigService],

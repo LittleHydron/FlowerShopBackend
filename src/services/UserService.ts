@@ -32,7 +32,7 @@ export class UserService implements IUserService{
 
   async getCardTypeId(userId: number): Promise<number> {
     const user = await this.usersRepository.findOneBy({ userId: userId});
-    return user.cardType.cardTypeId;
+    return user.cardTypeCardTypeId;
   }
 
   async findOneByUsername(username: string): Promise<UserEntity | undefined> {
