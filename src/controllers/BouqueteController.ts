@@ -1,11 +1,15 @@
+import { IBouqueteController } from "@interfaces/controllers/IBouqueteController";
+
 import { IBouqueteService } from "@interfaces/services/IBouqueteService";
+
 import { Public } from "@controllers/AnonDecorator";
+
 import { BouqueteDto } from "@dto/BouqueteDto";
 
 import { Controller, Get, Inject } from "@nestjs/common";
 
 @Controller("bouquete")
-export class BouqueteController {
+export class BouqueteController implements IBouqueteController{
     constructor(
         @Inject(IBouqueteService)
         private readonly bouqueteService: IBouqueteService

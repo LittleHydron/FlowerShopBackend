@@ -1,19 +1,16 @@
-import { FlowerEntity } from '@entities/FlowerEntity';
-import { UserEntity } from '@entities/UserEntity';
 import { AppModule } from '@modules/AppModule';
 
 import { NestFactory } from '@nestjs/core';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
-import { UserService } from '@services/UserService';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
-
-  app.enableCors({
-    origin: true,
-    methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
-    allowedHeaders: "Content-Type, Accept, Authorization"
-  });
+  
+  // app.enableCors({
+  //   origin: true,
+  //   methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+  //   allowedHeaders: "Content-Type, Accept, Authorization"
+  // });
 
   const swaggerConfig = new DocumentBuilder()
     .setTitle('Flower Shop')

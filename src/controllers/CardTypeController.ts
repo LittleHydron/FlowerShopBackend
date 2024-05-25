@@ -1,12 +1,16 @@
+import { ICardTypeController } from "@interfaces/controllers/ICardTypeController";
+
 import { ICardTypeService } from "@interfaces/services/ICardTypeService";
 
 import { Public } from "@controllers/AnonDecorator";
+
 import { CardTypeDto } from "@dto/CardTypeDto";
 
 import { Controller, Get, Inject, Param } from "@nestjs/common";
 
+
 @Controller('card-types')
-export class CardTypeController {
+export class CardTypeController implements ICardTypeController{
     constructor(
         @Inject(ICardTypeService)
         private readonly cardTypeService: ICardTypeService

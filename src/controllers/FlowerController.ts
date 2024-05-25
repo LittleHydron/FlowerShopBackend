@@ -1,11 +1,15 @@
-import { FlowerDto } from "@dto/FlowerDto";
+import { IFlowerController } from "@interfaces/controllers/IFlowerController";
+
 import { IFlowerService } from "@interfaces/services/IFlowerService";
-import { Controller, Get, Inject, Param } from "@nestjs/common";
+
 import { Public } from "@controllers/AnonDecorator";
-import { ApiParam } from "@nestjs/swagger";
+
+import { FlowerDto } from "@dto/FlowerDto";
+
+import { Controller, Get, Inject, Param } from "@nestjs/common";
 
 @Controller('flowers')
-export class FlowerController {
+export class FlowerController implements IFlowerController{
     
     constructor(
         @Inject(IFlowerService)
@@ -14,7 +18,7 @@ export class FlowerController {
 
     @Public()
     @Get('all')
-    async getAll() {
+    async getAll(): Promise<FlowerDto[]> {
         const flowers = await this.flowerService.getAll();
         return flowers.map(flower => new FlowerDto(flower));
     }

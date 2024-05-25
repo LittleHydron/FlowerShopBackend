@@ -1,10 +1,14 @@
+import { IAuthController } from '@interfaces/controllers/IAuthController';
+
 import { IAuthService } from '@interfaces/services/IAuthService';
+import { ICardTypeService } from '@interfaces/services/ICardTypeService';
 
 import { Public } from '@controllers/AnonDecorator';
 import { AuthGuard } from '@controllers/AuthGuard';
 
 import { UserDto, UserLoginDto, UserRegisterDto } from '@dto/UserDto';
 
+import { UserEntity } from '@entities/UserEntity';
 
 import { ApiResponse } from '@nestjs/swagger';
 import {
@@ -18,11 +22,9 @@ import {
   Request,
   UseGuards
 } from '@nestjs/common';
-import { UserEntity } from '@entities/UserEntity';
-import { ICardTypeService } from '@interfaces/services/ICardTypeService';
 
 @Controller('auth')
-export class AuthController {
+export class AuthController implements IAuthController{
   constructor(
     @Inject(IAuthService)
     private authService: IAuthService,

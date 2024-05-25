@@ -12,7 +12,6 @@ export class CardTypeService {
   ) {}
 
   async findOne(id: number): Promise<CardTypeEntity> {
-    console.log('CardTypeService.findOne ', id);
     return await this.cardTypesRepository.findOneBy({ cardTypeId: id });
   }
 
