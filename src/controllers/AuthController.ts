@@ -1,6 +1,7 @@
 import { IAuthController } from '@interfaces/controllers/IAuthController';
 
 import { IAuthService } from '@interfaces/services/IAuthService';
+import { IUserService } from '@interfaces/services/IUserService';
 import { ICardTypeService } from '@interfaces/services/ICardTypeService';
 
 import { Public } from '@controllers/AnonDecorator';
@@ -22,6 +23,7 @@ import {
   Request,
   UseGuards
 } from '@nestjs/common';
+import { DtoTransformer } from '@dto/DtoTransformer';
 
 @Controller('auth')
 export class AuthController implements IAuthController{
@@ -29,7 +31,9 @@ export class AuthController implements IAuthController{
     @Inject(IAuthService)
     private authService: IAuthService,
     @Inject(ICardTypeService)
-    private cardTypeService: ICardTypeService
+    private cardTypeService: ICardTypeService,
+    @Inject(IUserService)
+    private userService: IUserService
   ) {}
 
   @Public()
@@ -51,8 +55,10 @@ export class AuthController implements IAuthController{
     description: 'Get profile',
     type: UserDto,
   })
-  getProfile(@Request() req) {
-    return req.user;
+  async getProfile(@Request() req): Promise<UserDto> {
+    const userEntity = await this.userService.findOneByUsername(req.user.username);
+    console.log(userEntity);
+    return DtoTransformer.UserEntityToUserDto(userEntity);
   }
 
   @Public()

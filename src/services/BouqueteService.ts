@@ -14,6 +14,10 @@ export class BouqueteService implements IBouqueteService{
         private readonly bouqueteRepository: Repository<BouqueteEntity>
     ){}
 
+    async create(bouquete: Partial<BouqueteEntity>): Promise<BouqueteEntity> {
+        return await this.bouqueteRepository.save(bouquete);
+    }
+
     async getAll(): Promise<BouqueteEntity[]> {
         return await this.bouqueteRepository.find();
     }

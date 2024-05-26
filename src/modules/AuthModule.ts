@@ -1,9 +1,11 @@
 import { IAuthService } from '@interfaces/services/IAuthService';
+import { IUserService } from '@interfaces/services/IUserService';
 import { ICardTypeService } from '@interfaces/services/ICardTypeService';
 
 import { UsersModule } from '@modules/UsersModule';
 
 import { AuthService } from '@services/AuthService';
+import { UserService } from '@services/UserService';
 import { CardTypeService } from '@services/CardTypeService';
 
 import { AuthController } from '@controllers/AuthController';
@@ -38,6 +40,10 @@ import { TypeOrmModule } from '@nestjs/typeorm';
         {
             provide: ICardTypeService,
             useClass: CardTypeService,
+        },
+        {
+            provide: IUserService,
+            useClass: UserService,
         },
         {
             provide: APP_GUARD,

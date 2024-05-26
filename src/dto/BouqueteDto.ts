@@ -15,11 +15,5 @@ export class BouqueteDto {
 export class BouqueteCreateDto {
 
     @ApiProperty()
-    bouqueteId: number;
-
-    @ApiProperty()
     name: string;
-
-    @ApiProperty()
-    event: string;
 }

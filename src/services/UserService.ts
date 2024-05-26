@@ -26,7 +26,9 @@ export class UserService implements IUserService{
 
   async update(id: number, changedObj: UserPutDto): Promise<UserEntity> {
     await this.usersRepository.update(id, changedObj);
-    const newUser = await this.usersRepository.findOneBy({ userId: id });
+    const newUser = await this.usersRepository.findOneBy({
+      userId: id
+    });
     return newUser;
   }
 
@@ -36,6 +38,12 @@ export class UserService implements IUserService{
   }
 
   async findOneByUsername(username: string): Promise<UserEntity | undefined> {
-    return this.usersRepository.findOneBy({ username: username });
+    const found = await this.usersRepository.find({
+      where: {
+        username: username
+      },
+      relations: ['cardType']
+    });
+    return found[0];
   }
 }
