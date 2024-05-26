@@ -8,6 +8,7 @@ import { Public } from '@controllers/AnonDecorator';
 import { AuthGuard } from '@controllers/AuthGuard';
 
 import { UserDto, UserLoginDto, UserRegisterDto } from '@dto/UserDto';
+import { DtoTransformer } from '@dto/DtoTransformer';
 
 import { UserEntity } from '@entities/UserEntity';
 
@@ -23,7 +24,6 @@ import {
   Request,
   UseGuards
 } from '@nestjs/common';
-import { DtoTransformer } from '@dto/DtoTransformer';
 
 @Controller('auth')
 export class AuthController implements IAuthController{
